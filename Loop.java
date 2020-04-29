@@ -6,7 +6,6 @@ public class Loop {
         Scanner scan = new Scanner(System.in); // setup scanner to read user input from console
         boolean yes = true; // initialize default value as true
 
-        System.out.println(Double.MAX_VALUE);
         // Loop until the yes is no longer true!
         while (yes) {
             System.out.print("Do you want to play a game? (yes/no)"); // prompt user to input yes or no
