@@ -10,9 +10,15 @@ public class GuessDistance {
     /**
      * Default constructor. populates US cities
      */
-    public GuessDistance() {
+    public GuessDistance() {}
+
+    /**
+     * Controls if you want to play online or offline
+     * @param online switches between online or offline
+     */
+    public GuessDistance(boolean offline) {
         System.out.println("Please wait .... populating US Cities!");
-        cities = new USCities();
+        cities = new USCities(offline);
     }
 
     /**
@@ -64,21 +70,29 @@ public class GuessDistance {
      * @param args accepts arguments as String
      */
     public static void main(String[] args) {
+        boolean offline = false;
+        if (args.length > 0) {
+            if (args[0].matches("offline|true")) {
+                offline = true;
+            }
+        }
         String response = "Yeah"; // initialize default value as "Yeah"
         Scanner scan = new Scanner(System.in); // setup scanner to read user input from console
         boolean yes = true; // initialize default value as true
         System.out.println("We will be playing game call \"Guess the Distance\" between two US Cities!");
         System.out.print("Are you ready? (y/n)");
-        response = scan.next(); // read user input
-        yes = response.matches("(y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
-        GuessDistance gDistance = new GuessDistance();
+        response = scan.nextLine(); // read user input
+        yes = response.matches("(\\d+|y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
+        GuessDistance gDistance = new GuessDistance(offline);
         while (yes) {
             try {
                 City[] gCity = gDistance.getRandomTwoCities();
                 System.out.println("Starting city: " + gCity[0].name);
                 System.out.println("Destination city: " + gCity[1].name);
                 System.out.print("How far do you think these cities are from each other in miles? ");
-                double distance = scan.nextDouble();
+                String guess_distance = scan.nextLine();
+                String numbers = guess_distance.replaceAll("[^0-9]", "");
+                double distance = Double.parseDouble(numbers);
                 double actual_distance = gDistance.calculateDistance(gCity[0], gCity[1]);
                 if (gDistance.checkGuess(distance, actual_distance, 10)) {
                     System.out.println("\nAwsome job! You guessed it within +- 10%: "
@@ -88,11 +102,13 @@ public class GuessDistance {
                     System.out.println("\nGood luck next time! You were off by more than 10% ...");
                     do {
                         System.out.print("Do you want to try to guess again?? (y/n) ");
-                        response = scan.next(); // read user input
-                        yes = response.matches("(y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
+                        response = scan.nextLine(); // read user input
+                        yes = response.matches("(\\d+|y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
                         if (yes) {
                             System.out.print("Try your best guess!! ");
-                            distance = scan.nextDouble();
+                            guess_distance = scan.nextLine();
+                            numbers = guess_distance.replaceAll("[^0-9]", "");
+                            distance = Double.parseDouble(numbers);
                             if (gDistance.checkGuess(distance, actual_distance, 10)) {
                                 System.out.println("\nAwsome job! You guessed it within +- 10%: "
                                         + Math.floor(distance / actual_distance * 100));
@@ -110,8 +126,8 @@ public class GuessDistance {
                 System.err.println(e.getMessage());
             }
             System.out.print("\nDo you want to play again?? (y/n) ");
-            response = scan.next(); // read user input
-            yes = response.matches("(y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
+            response = scan.nextLine(); // read user input
+            yes = response.matches("(\\d+|y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
         }
         System.out.println("\nThanks for playing the game!");
         scan.close();

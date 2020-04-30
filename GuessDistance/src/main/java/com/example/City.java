@@ -1,20 +1,25 @@
 package com.example;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class City {
 
     /**
      * holds name of a city.
      */
+    @JsonProperty(value="name")
     String name;
 
     /**
      * holds latitude value of a city in radian
      */
+    @JsonProperty(value="latitude")
     double latitude;
 
     /**
      * holds longitude value of a city in radian
      */
+    @JsonProperty(value="longitude")
     double longitude;
 
     /**
@@ -33,14 +38,28 @@ public class City {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-    /**
-     * converts City object as JSON String
-     */
-    public String toString() {
-        StringBuffer sbuf = new StringBuffer();
-        sbuf.append("{\"name\":\"").append(name).append("\",");
-        sbuf.append("\"latitude\":\"").append(latitude).append("\",");
-        sbuf.append("\"longitude\":\"").append(longitude).append("\"}");
-        return sbuf.toString();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

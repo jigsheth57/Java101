@@ -1,6 +1,12 @@
 package com.example;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,13 +20,26 @@ public class USCities {
      * Default constructor.
      */
     public USCities() {
+    }
+
+    public USCities(boolean offline) {
         // pre-populate us cities.
         try {
-            this.getCitiesFromInternet();
+            if (offline) {
+                // create object mapper instance
+                ObjectMapper mapper = new ObjectMapper();
+                File jsonFile = new File(getClass().getClassLoader().getResource("uscities.json").getFile());
+                // File jsonFile = new File(getClass().getResource("uscities.json").getFile());
+                List<City> cities = Arrays.asList(mapper.readValue(jsonFile, City[].class));
+                usCities.addAll(cities);
+            } else {
+                this.getCitiesFromInternet();
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
+
     /**
      * Pre-populates US Cities from Internet
      */
@@ -42,7 +61,7 @@ public class USCities {
             Document doc = Jsoup.connect(urls[i++]).get(); // Connect to website and grab the HTML source
             Elements table = doc.select("table"); // Grab HTML table from the source
             Elements tr = table.first().getElementsByTag("tr"); // Grab all the table rows
-            for (int idx = 1; idx < tr.size(); idx++) {   // For each rows, grab the place name, latitude & longitude
+            for (int idx = 1; idx < tr.size(); idx++) { // For each rows, grab the place name, latitude & longitude
                 Elements td = tr.get(idx).getElementsByTag("td");
                 City city = new City();
                 city.name = td.get(0).child(0).attr("title");
@@ -62,10 +81,12 @@ public class USCities {
     }
 
     /**
-     * Calculates distance between two cities as-the-crow-flies. It will use 'haversine' formula to calculate distance.
-     * reference: https://andrew.hedges.name/experiments/haversine/
+     * Calculates distance between two cities as-the-crow-flies. It will use
+     * 'haversine' formula to calculate distance. reference:
+     * https://andrew.hedges.name/experiments/haversine/
+     * 
      * @param start starting city
-     * @param end destination city
+     * @param end   destination city
      * @return distance in miles.
      */
     public double calculateDistance(City start, City end) {
@@ -73,8 +94,9 @@ public class USCities {
         double EARTH_RADIUS = 3961;
         double dlon = Math.toRadians(end.longitude) - Math.toRadians(start.longitude);
         double dlat = Math.toRadians(end.latitude) - Math.toRadians(start.latitude);
-        double a = Math.pow(Math.sin(dlat/2), 2) + Math.cos(Math.toRadians(start.latitude)) * Math.cos(Math.toRadians(end.latitude)) * Math.pow(Math.sin(dlon/2), 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(Math.toRadians(start.latitude))
+                * Math.cos(Math.toRadians(end.latitude)) * Math.pow(Math.sin(dlon / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double d = EARTH_RADIUS * c;
         return d;
     }
@@ -86,7 +108,7 @@ public class USCities {
         StringBuffer sbuff = new StringBuffer("[");
         for (int idx = 0; idx < usCities.size(); idx++) {
             sbuff.append(usCities.get(idx));
-            if (idx < usCities.size()-1) {
+            if (idx < usCities.size() - 1) {
                 sbuff.append(",");
             }
         }
