@@ -70,9 +70,9 @@ public class GuessDistance {
      * @param args accepts arguments as String
      */
     public static void main(String[] args) {
-        boolean offline = false;
+        boolean offline = true;
         if (args.length > 0) {
-            if (args[0].matches("offline|true")) {
+            if (args[0].matches("o|O|online|true")) {
                 offline = true;
             }
         }

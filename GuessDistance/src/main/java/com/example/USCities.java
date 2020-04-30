@@ -1,10 +1,12 @@
 package com.example;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,9 +30,7 @@ public class USCities {
             if (offline) {
                 // create object mapper instance
                 ObjectMapper mapper = new ObjectMapper();
-                File jsonFile = new File(getClass().getClassLoader().getResource("uscities.json").getFile());
-                // File jsonFile = new File(getClass().getResource("uscities.json").getFile());
-                List<City> cities = Arrays.asList(mapper.readValue(jsonFile, City[].class));
+                List<City> cities = Arrays.asList(mapper.readValue(this.getClass().getClassLoader().getResourceAsStream("assets/uscities.json"), City[].class));
                 usCities.addAll(cities);
             } else {
                 this.getCitiesFromInternet();

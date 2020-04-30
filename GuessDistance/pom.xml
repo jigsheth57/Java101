@@ -59,11 +59,11 @@
             <plugin>
                 <groupId>org.skife.maven</groupId>
                 <artifactId>really-executable-jar-maven-plugin</artifactId>
-                <version>1.4.1</version>
+                <version>1.5.0</version>
                 <configuration>
                     <!-- value of flags will be interpolated into the java invocation -->
                     <!-- as "java $flags -jar ..." -->
-                    <flags>-Xmx4G</flags>
+                    <flags>-Xmx1G</flags>
 
                     <!-- (optional) name for binary executable, if not set will just -->
                     <!-- make the regular jar artifact executable -->
