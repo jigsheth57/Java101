@@ -94,6 +94,7 @@ public class GuessDistance {
                                 yes = false;
                             } else {
                                 System.out.println("\nNot bad ... Good luck next time!");
+                                System.out.println("Your guess is too "+(distance > actual_distance ? "high" : "low"));
                             }
                         }
                     } while (yes);
