@@ -10,7 +10,9 @@ public class USCities {
 
     private ArrayList<City> usCities = new ArrayList<City>();
 
-    // Default constructor
+    /**
+     * Default constructor.
+     */
     public USCities() {
         // pre-populate us cities.
         try {
@@ -19,10 +21,10 @@ public class USCities {
             System.err.println(e.getMessage());
         }
     }
-    /*
-    * Pre-populate US Cities from Internet
-    */
-    public void getCitiesFromInternet() throws Exception {
+    /**
+     * Pre-populates US Cities from Internet
+     */
+    private void getCitiesFromInternet() throws Exception {
         // These 9 websites will be used to get the US Cities information
         String[] urls = new String[9];
         urls[0] = "https://www.latlong.net/category/cities-236-15.html";
@@ -51,16 +53,21 @@ public class USCities {
         } while (i < urls.length);
     }
 
+    /**
+     * 
+     * @return pre-populated us cities from internet as ArrayList
+     */
     public ArrayList<City> getUSCities() {
         return usCities;
     }
 
+    /**
+     * @return Converts USCities as JSON String
+     */
     public String toString() {
         StringBuffer sbuff = new StringBuffer("[");
         for (int idx = 0; idx < usCities.size(); idx++) {
-            sbuff.append("{\"name\":\"").append(usCities.get(idx).name).append("\",");
-            sbuff.append("\"latitude\":\"").append(usCities.get(idx).latitude).append("\",");
-            sbuff.append("\"longitude\":\"").append(usCities.get(idx).longitude).append("\"}");
+            sbuff.append(usCities.get(idx));
             if (idx < usCities.size()-1) {
                 sbuff.append(",");
             }

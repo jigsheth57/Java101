@@ -2,6 +2,10 @@ package com.example;
 
 public class GuessDistance {
 
+    /**
+     * Main class to run the program
+     * @param accepts arguments as String
+     */
     public static void main(String[] args) {
         USCities cities = new USCities();
         try {
