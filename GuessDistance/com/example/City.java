@@ -18,6 +18,22 @@ public class City {
     double longitude;
 
     /**
+     * Default constructor
+     */
+    public City () {}
+
+    /**
+     * Assigns name, latitude and longitude during creation.
+     * @param name name of the city
+     * @param latitude latitude value in degree for the city
+     * @param longitude longitude value in degree for the city
+     */
+    public City (String name, double latitude, double longitude) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+    /**
      * converts City object as JSON String
      */
     public String toString() {

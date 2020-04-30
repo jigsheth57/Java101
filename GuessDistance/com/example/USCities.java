@@ -62,6 +62,24 @@ public class USCities {
     }
 
     /**
+     * Calculates distance between two cities as-the-crow-flies. It will use 'haversine' formula to calculate distance.
+     * reference: https://andrew.hedges.name/experiments/haversine/
+     * @param start starting city
+     * @param end destination city
+     * @return distance in miles.
+     */
+    public double calculateDistance(City start, City end) {
+        // Earth’s radius (mean radius = 6,371km / 3961 miles)
+        double EARTH_RADIUS = 3961;
+        double dlon = Math.toRadians(end.longitude) - Math.toRadians(start.longitude);
+        double dlat = Math.toRadians(end.latitude) - Math.toRadians(start.latitude);
+        double a = Math.pow(Math.sin(dlat/2), 2) + Math.cos(Math.toRadians(start.latitude)) * Math.cos(Math.toRadians(end.latitude)) * Math.pow(Math.sin(dlon/2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double d = EARTH_RADIUS * c;
+        return d;
+    }
+
+    /**
      * @return Converts USCities as JSON String
      */
     public String toString() {
