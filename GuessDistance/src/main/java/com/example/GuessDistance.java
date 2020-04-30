@@ -100,6 +100,7 @@ public class GuessDistance {
                     System.out.println("Actual distance between cities: " + String.format("%.2f", actual_distance));
                 } else {
                     System.out.println("\nGood luck next time! You were off by more than 10% ...");
+                    System.out.println("Your guess is too " + (distance > actual_distance ? "high" : "low"));
                     do {
                         System.out.print("Do you want to try to guess again?? (y/n) ");
                         response = scan.nextLine(); // read user input
