@@ -7,7 +7,7 @@ public class AddNumbers {
         Scanner scan = new Scanner(System.in);
         System.out.println("This program adds numbers!");
 
-        boolean cont = true;
+        boolean cont = false;
         int total = 0;
         while (cont) {
             System.out.print("Please provide value a nunber value (< 127): ");
@@ -43,6 +43,8 @@ public class AddNumbers {
             System.out.println("i = " + i);
 
         }
+
+        System.out.println("Math.pow(3,2)" + Math.pow(3, 2));
     }
 
 }
