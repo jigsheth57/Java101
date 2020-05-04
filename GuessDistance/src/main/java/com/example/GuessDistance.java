@@ -72,8 +72,8 @@ public class GuessDistance {
     public static void main(String[] args) {
         boolean offline = true;
         if (args.length > 0) {
-            if (args[0].matches("o|O|online|true")) {
-                offline = true;
+            if (args[0].matches("(o|O|online|true)")) {
+                offline = false;
             }
         }
         String response = "Yeah"; // initialize default value as "Yeah"

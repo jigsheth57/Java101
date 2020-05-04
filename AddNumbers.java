@@ -45,6 +45,8 @@ public class AddNumbers {
         }
 
         System.out.println("Math.pow(3,2)" + Math.pow(3, 2));
+
+        scan.close();
     }
 
 }
