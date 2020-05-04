@@ -3,9 +3,9 @@ import java.util.Iterator;
 
 public class Expression {
     public static void main(String[] args) {
-        String expression = "1+23-4+2-2";
-        ArrayDeque signs = new ArrayDeque<String>();
-        ArrayDeque numbers = new ArrayDeque<Integer>();
+        String expression = "5-4+11-3+45";
+        ArrayDeque<String> signs = new ArrayDeque<String>();
+        ArrayDeque<Integer> numbers = new ArrayDeque<Integer>();
 
         String holdNumbers = "";
         for (int i = 0; i < expression.length(); i++) {
@@ -21,7 +21,7 @@ public class Expression {
         }
         numbers.push(Integer.parseInt(holdNumbers));
 
-        Iterator iter = signs.iterator();
+        Iterator<String> iter = signs.iterator();
 
         // while (iter.hasNext()) {
         //     System.out.println(iter.next());
