@@ -5,7 +5,7 @@ public class Stacks_v1 {
 
     public static void main(String[] args) {
         
-        String response = "5-6+6+32-56+96+32-1";
+        String response = "5";
 
         ArrayDeque<String> signs = new ArrayDeque<String>();
         ArrayDeque<Integer> numbers = new ArrayDeque<Integer>();
@@ -32,6 +32,9 @@ public class Stacks_v1 {
         Iterator<String> signIter = signs.iterator();
         int running_total = 0;
         boolean firstTime = true;
+        if(!signIter.hasNext()) {
+            running_total = numbers.pop();
+        }
         while(signIter.hasNext()) {
             String sign = (String)signIter.next();
             if(firstTime) {
