@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jsoup.Jsoup;
@@ -15,7 +16,8 @@ public abstract class Cities {
 
     ArrayList<City> cities = new ArrayList<City>();
 
-    public Cities() {}
+    public Cities() {
+    }
 
     public Cities(boolean offline, String country) {
         // pre-populate U.S.A cities.
@@ -23,11 +25,12 @@ public abstract class Cities {
             ObjectMapper mapper = new ObjectMapper();
             if (offline) {
                 // create object mapper instance
-                List<City> tempcities = Arrays.asList(mapper.readValue(this.getClass().getClassLoader().getResourceAsStream("assets/"+country.toLowerCase()+"_cities.json"), City[].class));
+                List<City> tempcities = Arrays.asList(mapper.readValue(this.getClass().getClassLoader()
+                        .getResourceAsStream("assets/" + country.toLowerCase() + "_cities.json"), City[].class));
                 cities.addAll(tempcities);
             } else {
                 this.getCitiesFromInternet();
-                mapper.writeValue(new File("./"+country.toLowerCase()+"_cities.json"), cities);
+                mapper.writeValue(new File("./" + country.toLowerCase() + "_cities.json"), cities);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +71,7 @@ public abstract class Cities {
      */
     public ArrayList<City> getCities() {
         return cities;
-    }    
+    }
 
     /**
      * Calculates distance between two cities as-the-crow-flies. It will use
@@ -95,14 +98,13 @@ public abstract class Cities {
      * @return Converts Cities as JSON String
      */
     public String toString() {
-        StringBuffer sbuff = new StringBuffer("[");
-        for (int idx = 0; idx < cities.size(); idx++) {
-            sbuff.append(cities.get(idx));
-            if (idx < cities.size() - 1) {
-                sbuff.append(",");
-            }
+        String citiesString = "";
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            citiesString = mapper.writeValueAsString(cities);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-        sbuff.append("]");
-        return sbuff.toString();
+        return citiesString;
     }    
 }
