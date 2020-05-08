@@ -8,19 +8,19 @@ public class City {
      * holds name of a city.
      */
     @JsonProperty(value="name")
-    String name;
+    private String name;
 
     /**
      * holds latitude value of a city in radian
      */
     @JsonProperty(value="latitude")
-    double latitude;
+    private double latitude;
 
     /**
      * holds longitude value of a city in radian
      */
     @JsonProperty(value="longitude")
-    double longitude;
+    private double longitude;
 
     /**
      * Default constructor

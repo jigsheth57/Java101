@@ -5,7 +5,7 @@ public class Stacks_v1 {
 
     public static void main(String[] args) {
         
-        String response = "5";
+        String response = "105+210-15+30-2";
 
         ArrayDeque<String> signs = new ArrayDeque<String>();
         ArrayDeque<Integer> numbers = new ArrayDeque<Integer>();

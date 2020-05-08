@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 public class GuessDistance {
 
-    public USCities cities;
+    
+    public Cities cities;
 
     /**
      * Default constructor. populates US cities
@@ -16,9 +17,15 @@ public class GuessDistance {
      * Controls if you want to play online or offline
      * @param online switches between online or offline
      */
-    public GuessDistance(boolean offline) {
-        System.out.println("Please wait .... populating US Cities!");
-        cities = new USCities(offline);
+    public GuessDistance(boolean offline, String country) {
+        if(!offline) {
+            System.out.println("Please wait .... populating "+country+" Cities!");
+        }
+        if (country.equals("India")) {
+            cities = new IndiaCities(offline);
+        } else {
+            cities = new USCities(offline);
+        }
     }
 
     /**
@@ -43,7 +50,7 @@ public class GuessDistance {
      */
     public City[] getRandomTwoCities() {
         City[] guess_cities = new City[2];
-        ArrayList<City> usCities = cities.getUSCities();
+        ArrayList<City> usCities = cities.getCities();
         int total_cities = usCities.size();
         int rand_city1 = Double.valueOf(Math.random() * total_cities).intValue();
         int rand_city2 = Double.valueOf(Math.random() * total_cities).intValue();
@@ -61,7 +68,7 @@ public class GuessDistance {
      * @return distance
      */
     public double calculateDistance(City start, City end) {
-        return cities.calculateDistance(start, end);
+        return cities.calculateDistanceInMiles(start, end);
     }
 
     /**
@@ -71,6 +78,7 @@ public class GuessDistance {
      */
     public static void main(String[] args) {
         boolean offline = true;
+        String country = "US";
         if (args.length > 0) {
             if (args[0].matches("(o|O|online|true)")) {
                 offline = false;
@@ -79,16 +87,16 @@ public class GuessDistance {
         String response = "Yeah"; // initialize default value as "Yeah"
         Scanner scan = new Scanner(System.in); // setup scanner to read user input from console
         boolean yes = true; // initialize default value as true
-        System.out.println("We will be playing game call \"Guess the Distance\" between two US Cities!");
-        System.out.print("Are you ready? (y/n)");
-        response = scan.nextLine(); // read user input
-        yes = response.matches("(\\d+|y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
-        GuessDistance gDistance = new GuessDistance(offline);
-        while (yes) {
+        System.out.println("Let's play a game call \"Guess the Distance\" between two Cities!");
+        System.out.println("\nYou have a choice of the country [US or India] ... Please choose the country.");
+        country = scan.nextLine();
+        country = country.matches("(India|india|in|IN|In)") ? "India" : "US";
+        GuessDistance gDistance = new GuessDistance(offline,country);
+        do {
             try {
                 City[] gCity = gDistance.getRandomTwoCities();
-                System.out.println("Starting city: " + gCity[0].name);
-                System.out.println("Destination city: " + gCity[1].name);
+                System.out.println("Starting city: " + gCity[0].getName());
+                System.out.println("Destination city: " + gCity[1].getName());
                 System.out.print("How far do you think these cities are from each other in miles? ");
                 String guess_distance = scan.nextLine();
                 String numbers = guess_distance.replaceAll("[^0-9]", "");
@@ -99,10 +107,10 @@ public class GuessDistance {
                             + Math.floor(distance / actual_distance * 100));
                     System.out.println("Actual distance between cities: " + String.format("%.2f", actual_distance));
                 } else {
-                    System.out.println("\nGood luck next time! You were off by more than 10% ...");
-                    System.out.println("Your guess is too " + (distance > actual_distance ? "high" : "low"));
+                    System.out.println("\nGood luck next time! You were off by more than +- 10% ...");
+                    System.out.println("Hint: your guess is too " + (distance > actual_distance ? "high" : "low"));
                     do {
-                        System.out.print("Do you want to try to guess again?? (y/n) ");
+                        System.out.print("Do you want to try to guess the distance again?? (y/n) ");
                         response = scan.nextLine(); // read user input
                         yes = response.matches("(\\d+|y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
                         if (yes) {
@@ -117,11 +125,11 @@ public class GuessDistance {
                             } else {
                                 System.out.println("\nNot bad ... Good luck next time!");
                                 System.out
-                                        .println("Your guess is too " + (distance > actual_distance ? "high" : "low"));
+                                        .println("Hint: your guess is too " + (distance > actual_distance ? "high" : "low"));
                             }
                         }
                     } while (yes);
-                    System.out.println("Actual distance between cities: " + String.format("%.2f", actual_distance));
+                    System.out.println("Actual distance between the cities: " + String.format("%.2f", actual_distance));
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -129,7 +137,7 @@ public class GuessDistance {
             System.out.print("\nDo you want to play again?? (y/n) ");
             response = scan.nextLine(); // read user input
             yes = response.matches("(\\d+|y|Y|yes|Yes|YES|Yeah|yeah|YEAH|yep|Yep|YEP|ok|OK)");
-        }
+        } while(yes);
         System.out.println("\nThanks for playing the game!");
         scan.close();
     }
