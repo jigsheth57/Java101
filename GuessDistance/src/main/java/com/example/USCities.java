@@ -8,8 +8,11 @@ public class USCities extends Cities {
         super(offline, COUNTRY);
     }
 
+    /**
+     * Set the websites URL to retrieve cities
+     */
     @Override
-    String[] getWebsites() {
+    public String[] getWebsites() {
         // These 9 websites will be used to get the US Cities information
         String[] urls = new String[9];
         urls[0] = "https://www.latlong.net/category/cities-236-15.html";

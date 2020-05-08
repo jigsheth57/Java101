@@ -35,7 +35,10 @@ public abstract class Cities {
         }
     }
 
-    abstract String[] getWebsites();
+    /**
+     * Set the websites URL to retrieve cities
+     */
+    public abstract String[] getWebsites();
 
     /**
      * Pre-populates US Cities from Internet
