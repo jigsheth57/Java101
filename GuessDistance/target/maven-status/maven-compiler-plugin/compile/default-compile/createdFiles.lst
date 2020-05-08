@@ -1,5 +1,8 @@
 com/example/IndiaCities.class
+com/.DS_Store
+com/example/.DS_Store
 com/example/USCities.class
 com/example/Cities.class
+.DS_Store
 com/example/City.class
 com/example/GuessDistance.class
