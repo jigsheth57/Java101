@@ -17,7 +17,6 @@ public class Kcalculator {
    
 
 
-
    System.out.println( "result is " +sum);
    System.out.println( "result  is " +minus);
    System.out.println( "result  is " +multiply);

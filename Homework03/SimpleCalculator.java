@@ -2,6 +2,14 @@ public class SimpleCalculator {
 
     private double running_total = 0.0;
 
+    public double getRunningTotal() {
+        return running_total;
+    }
+
+    public void setRunningTotal(double x) {
+        running_total = x;
+    }
+
     public double add(double x) {
         running_total = running_total + x;
         return running_total;
