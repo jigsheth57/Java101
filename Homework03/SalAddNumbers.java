@@ -9,6 +9,7 @@ public class SalAddNumbers extends SimpleCalculator {
     }
     public static void main(String[] args) {
 
+        // Since SalAddNumbers inherits SimpleCalculator, we can just create Object of SalAddNumbers type.
         // SimpleCalculator simpCalc = new SimpleCalculator();
         SalAddNumbers simpCalc = new SalAddNumbers();
         Scanner scanObject = new Scanner(System.in);
@@ -20,20 +21,6 @@ public class SalAddNumbers extends SimpleCalculator {
             operator = scanObject.next().charAt(0);
             System.out.print("Input a number:");
             int a = scanObject.nextInt();
-            //System.out.print("Input a number:");
-            //int b = scanObject.nextInt();
-            //int total = 0;
-            //switch (operator) {
-            //   case '+': total = a + b;
-            //         break;
-            //    case '-': total = a - b;
-            //            break;
-            //    case '*': total = a * b;
-            //            break;
-            //    case '/': total = a / b;
-            //            break;
-            //    case '^': total = (int) Math.pow(a, b);
-            //}
             if(operator == '%') {
                 System.out.println("Total = "+ simpCalc.power(operator, a));
             } else {
