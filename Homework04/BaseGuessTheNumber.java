@@ -2,6 +2,7 @@ public class BaseGuessTheNumber {
 
     private int number2Guess;
     private int[] range;
+    
     public static final int MIN = 0;
     public static final int MAX = 1;
 
