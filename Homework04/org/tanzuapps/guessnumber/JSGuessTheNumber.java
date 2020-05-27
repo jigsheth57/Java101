@@ -1,3 +1,5 @@
+package org.tanzuapps.guessnumber;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -39,7 +41,7 @@ public class JSGuessTheNumber extends BaseGuessTheNumber {
     } 
 
     public static void main(String[] args) {
-        int[] range = new int[] {20,35};
+        int[] range = new int[] {5,10};
         Scanner scanner = new Scanner(System.in);
         System.out.println("Let's play game \"Guess the number\"!\n");
         do {
