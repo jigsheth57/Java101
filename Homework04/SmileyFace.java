@@ -2,10 +2,10 @@ public class SmileyFace {
 
     public static final int ROWS = 10;
     public static final int COLUMNS = 21;
-    static final String CANVAS = "-";
-    static final String NOSE = "?";
-    static final String EYES = "O";
-    static final String SMILE = "^";
+    static final String CANVAS = " ";
+    static final String NOSE = "👃";
+    static final String EYES = "👁";
+    static final String SMILE = "$";
 
     String[][] canvas = new String[ROWS][COLUMNS];
 
@@ -27,12 +27,12 @@ public class SmileyFace {
         int smileRow = centerX + 1;
 
         // symmetrically to nose (8 column offset on both side from center)
-        canvas[smileRow][centerY + 8] = SMILE;
-        canvas[smileRow][centerY - 8] = SMILE;
+        canvas[smileRow][centerY + 8] = "/";
+        canvas[smileRow][centerY - 8] = "\\";
 
         // span smile to next row
-        canvas[smileRow+1][centerY + 6] = SMILE;
-        canvas[smileRow+1][centerY - 6] = SMILE;
+        canvas[smileRow+1][centerY + 6] = "/";
+        canvas[smileRow+1][centerY - 6] = "\\";
 
         // span smile to next row and fill the smile :D
         int end = centerY + 4;
@@ -54,16 +54,16 @@ public class SmileyFace {
         canvas[eyeRow][centerY+5] = EYES;
         canvas[eyeRow][centerY-5] = EYES;
 
-        canvas[eyeRow][centerY + 4] = "(";
-        canvas[eyeRow][centerY + 6] = ")";
-        canvas[eyeRow][centerY - 6] = "(";
-        canvas[eyeRow][centerY - 4] = ")";
+        // canvas[eyeRow][centerY + 4] = "(";
+        // canvas[eyeRow][centerY + 6] = ")";
+        // canvas[eyeRow][centerY - 6] = "(";
+        // canvas[eyeRow][centerY - 4] = ")";
 
         // three rows above nose for brow
         eyeRow = centerX - 3;
         // symmetrically to nose (5 column offset on both side from center)
-        canvas[eyeRow][centerY + 5] = "^";
-        canvas[eyeRow][centerY - 5] = "^";
+        canvas[eyeRow][centerY + 5] =" ͡";
+        canvas[eyeRow][centerY - 5] = " ͡";
 
     }
 
