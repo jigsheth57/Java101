@@ -14,7 +14,8 @@ public class SmileyFace {
     }
 
     public void drawSmile() {
-        int row = canvas.length - 4;
+        int center = ROWS/2;
+        int row = center + 1;
         canvas[row][2] = "$";
         canvas[row][COLUMNS-3] = "$";
         canvas[row+1][4] = "$";
@@ -26,13 +27,14 @@ public class SmileyFace {
     }
 
     public void drawEyes() {
-        int row = canvas.length - 7;
-        canvas[row][7] = "0";
-        canvas[row][COLUMNS-8] = "0";
+        int row = canvas.length / 2 - 2;
+        int center = COLUMNS/2;
+        canvas[row][center+5] = "0";
+        canvas[row][center-5] = "0";
     }
 
     public void drawNose() {
-        int row = canvas.length - 5;
+        int row = canvas.length/2;
         canvas[row][COLUMNS/2] = "?";
     }
 
