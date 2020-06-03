@@ -1,7 +1,7 @@
 public class Circle {
 
     public static final int ROWS = 13;
-    public static final int COLUMNS = 31;
+    public static final int COLUMNS = 25;
     static final String CANVAS = " ";
     static final String CIRCLE = "*";
 
@@ -54,45 +54,47 @@ public class Circle {
 
         for (int x = 0; x < ROWS; x++) {
             switch (x) {
-                case 0:
+                case ROWS-ROWS:
                 case ROWS-1:
                     for (int y=(midpoint-3);y<=(midpoint+3);y++)
                         canvas[x][y] = CIRCLE;
-                    // canvas[x][midpoint] = CIRCLE;                                                
-                    // canvas[x][midpoint+3] = CIRCLE;
-                    // canvas[x][midpoint-3] = CIRCLE;
                     break;            
                 case 1:
                 case ROWS-2:
                     for (int y=(midpoint-6);y<=(midpoint+6);y++)
                         canvas[x][y] = CIRCLE;
-                    // canvas[x][midpoint+6] = CIRCLE;
-                    // canvas[x][midpoint-6] = CIRCLE;
                     break;            
                 case 2:
                 case ROWS-3:
-                for (int y=(midpoint-9);y<=(midpoint+9);y++)
-                    canvas[x][y] = CIRCLE;
-            // canvas[x][midpoint+9] = CIRCLE;
-            //         canvas[x][midpoint-9] = CIRCLE;
+                    for (int y=(midpoint-9);y<=(midpoint+9);y++)
+                        canvas[x][y] = CIRCLE;
+                    canvas[x][midpoint-9] = CANVAS;
+                    canvas[x][midpoint+9] = CANVAS;
                     break;            
                 case 3:
                 case ROWS-4:
-                    canvas[x][midpoint+10] = CIRCLE;
-                    canvas[x][midpoint-10] = CIRCLE;
+                    for (int y=(midpoint-10);y<=(midpoint+10);y++)
+                        canvas[x][y] = CIRCLE;
+                    canvas[x][midpoint-7] = CANVAS;
+                    canvas[x][midpoint+7] = CANVAS;
                     break;            
                 case 4:
                 case ROWS-5:
-                    canvas[x][midpoint+11] = CIRCLE;
-                    canvas[x][midpoint-11] = CIRCLE;
+                    for (int y=(midpoint-11);y<=(midpoint+11);y++)
+                        canvas[x][y] = CIRCLE;
+                    canvas[x][midpoint-6] = CANVAS;
+                    canvas[x][midpoint+6] = CANVAS;
                     break;            
-                case (ROWS / 2)-1:
+                    case (ROWS / 2)-1:
                 case (ROWS / 2):
                 case (ROWS / 2)+1:
-                    canvas[x][midpoint+12] = CIRCLE;
-                    canvas[x][midpoint-12] = CIRCLE;
-                    break;                            
-                }
+                    for (int y=(midpoint-12);y<=(midpoint+12);y++)
+                        canvas[x][y] = CIRCLE;
+                    canvas[x][midpoint-5] = CANVAS;
+                    canvas[x][midpoint+5] = CANVAS;
+                    break;            
+            }
+            canvas[x][midpoint] = CANVAS;
         }
     }
 
